@@ -1,0 +1,32 @@
+{
+	"name": "dayofweek",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "var",
+					"value": {
+						"value": "@string(contains('1345', string(dayOfWeek(utcNow()))))",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"var": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2025-11-11T12:53:55Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

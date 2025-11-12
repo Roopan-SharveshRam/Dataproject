@@ -1,0 +1,14 @@
+{
+	"name": "adfkssr",
+	"properties": {
+		"globalConfigurations": {
+			"PipelineBillingEnabled": "true"
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "61ed2ecc-450e-4f47-89df-da37540a66bf",
+		"tenantId": "b859520a-6b82-492f-b45d-4e205dcb7d6e"
+	}
+}
