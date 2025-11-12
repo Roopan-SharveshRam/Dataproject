@@ -5,9 +5,20 @@
 			{
 				"name": "Copy data1",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Lookup1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set variable1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -18,22 +29,51 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "JsonSource",
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": {
+							"value": "select * from @{pipeline().parameters.schema}.@{pipeline().parameters.table} where @{pipeline().parameters.cdc_col} > '@{activity('Lookup1').output.firstRow[0].cdc}'\n",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "ParquetSink",
 						"storeSettings": {
-							"type": "AzureBlobFSReadSettings",
-							"recursive": true,
-							"enablePartitionDiscovery": false
+							"type": "AzureBlobFSWriteSettings"
 						},
 						"formatSettings": {
-							"type": "JsonReadSettings"
+							"type": "ParquetWriteSettings"
 						}
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
 				},
 				"inputs": [
 					{
-						"referenceName": "Json1",
+						"referenceName": "prodsAzureSqlTable3",
 						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Parquet1",
+						"type": "DatasetReference",
+						"parameters": {
+							"container": "bronze",
+							"folder": "users",
+							"file": {
+								"value": "@concat(pipeline().parameters.table,'_',variables('time'))",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			},
@@ -91,40 +131,14 @@
 			}
 		],
 		"parameters": {
-			"loop": {
-				"type": "string",
-				"defaultValue": [
-					{
-						"schema": "dbo",
-						"table": "DimUser",
-						"cdc_col": "updated_at",
-						"from_date": ""
-					},
-					{
-						"schema": "dbo",
-						"table": "DimTrack",
-						"cdc_col": "updated_at",
-						"from_date": ""
-					},
-					{
-						"schema": "dbo",
-						"table": "DimDate",
-						"cdc_col": "date",
-						"from_date": ""
-					},
-					{
-						"schema": "dbo",
-						"table": "DimArtist",
-						"cdc_col": "updated_at",
-						"from_date": ""
-					},
-					{
-						"schema": "dbo",
-						"table": "FactStream",
-						"cdc_col": "stream_timestamp",
-						"from_date": ""
-					}
-				]
+			"schema": {
+				"type": "string"
+			},
+			"table": {
+				"type": "string"
+			},
+			"cdc_col": {
+				"type": "string"
 			}
 		},
 		"variables": {
