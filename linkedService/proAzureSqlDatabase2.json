@@ -1,0 +1,17 @@
+{
+	"name": "proAzureSqlDatabase2",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"server": "demoservertouse.database.windows.net",
+			"database": "azureproject",
+			"encrypt": "mandatory",
+			"trustServerCertificate": false,
+			"authenticationType": "SQL",
+			"userName": "roopan",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEY5MjExMjY3LUUwNUQtNEY5My1BRTJCLTA2OUMzNkUyODk0Ql81ZWU3ZGRmMC0zYzE3LTRhMDgtYTE4Yy00NDRlMDRkZjk0ZDUiDQp9"
+		}
+	}
+}

@@ -1,0 +1,12 @@
+{
+	"name": "prodsAzureSqlTable3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "proAzureSqlDatabase2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}
