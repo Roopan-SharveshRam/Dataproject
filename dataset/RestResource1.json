@@ -5,10 +5,21 @@
 			"referenceName": "RestService1",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"offset": {
+				"type": "string"
+			},
+			"limit": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "RestResource",
 		"typeProperties": {
-			"relativeUrl": ""
+			"relativeUrl": {
+				"value": "?offset= @{dataset().offset}&limit=@{dataset().limit} ",
+				"type": "Expression"
+			}
 		},
 		"schema": []
 	}
