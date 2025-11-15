@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "pokemon1.json",
+				"fileName": "pokemon2.json",
 				"folderPath": "api",
 				"fileSystem": "sink"
 			}
