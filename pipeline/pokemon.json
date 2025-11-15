@@ -45,7 +45,7 @@
 						"requestInterval": "00.00:00:00.010",
 						"requestMethod": "GET",
 						"paginationRules": {
-							"QueryParameters.offset": "RANGE:0:1328:20"
+							"QueryParameters.offset": "RANGE:1:1328:50"
 						}
 					},
 					"sink": {
